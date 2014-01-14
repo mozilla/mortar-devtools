@@ -2,8 +2,9 @@
   "name": "mortar-devtools",
   "version": "0.0.1",
   "description": "A collection of Web App templates for Firefox's Devtools",
-  "main": "run.js",
+  "main": "build.js",
   "scripts": {
+    "start": "node_modules/.bin/gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
