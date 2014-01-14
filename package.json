@@ -16,6 +16,8 @@
   "author": "Mozilla",
   "license": "Apache 2",
   "devDependencies": {
-    "gulp": "~3.3.2"
+    "gulp": "~3.3.2",
+    "gulp-zip": "~0.1.1",
+    "through": "~2.3.4"
   }
 }
