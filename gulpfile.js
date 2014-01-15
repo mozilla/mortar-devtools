@@ -3,17 +3,21 @@ var through = require('through');
 
 
 gulp.task('default', function() {
-  console.log('hi and bye');
 
   gulp.src('templates/*')
     .pipe(through(function(file) {
 
       if(file.isDirectory) {
-        console.log(file.path, 'is directory');
+
+        var projectGulp = file.path + '/gulpfile.js';
+        console.log(projectGulp);
 
         // call build script in that directory
-        // collect project/dist/archive.zip file onto our dist/{base}.zip
-
+        require(projectGulp).run('default');
+        console.log('done with ' + projectGulp);
+        
+        // TODO collect project/dist/archive.zip file onto our dist/{base}.zip
+        
       }
 
     }));
