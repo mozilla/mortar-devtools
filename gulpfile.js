@@ -1,5 +1,7 @@
 var gulp = require('gulp');
 var through = require('through');
+var rename = require('gulp-rename');
+var path = require('path');
 
 gulp.task('default', function() {
 
@@ -9,7 +11,9 @@ gulp.task('default', function() {
       if(file.isDirectory) {
 
         var projectGulp = file.path + '/gulpfile.js';
+        var projectBasename = path.basename(file.path);
         console.log(projectGulp);
+
 
         var cwd = process.cwd();
 
@@ -20,7 +24,9 @@ gulp.task('default', function() {
         console.log('done with ' + projectGulp);
         
         // TODO collect project/dist/archive.zip file onto our dist/{base}.zip
-        
+        gulp.src(file.path + '/dist/archive.zip')
+          .pipe(rename(projectBasename + '.zip'))
+          .pipe(gulp.dest('dist'));
       }
 
     }));
