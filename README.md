@@ -16,6 +16,7 @@ npm start
 - Generate JSON for devtools
   - Where does the data for each entry come from? title, description
     - Each template folder?
+- Probably refactor common functions that will arise as more templates are added
 - Things to test
   - For each template in templates/ there must be a generated ZIP file
   - Each ZIP must contain a valid project
