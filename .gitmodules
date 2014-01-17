@@ -1,3 +1,6 @@
 [submodule "templates/app-stub/src"]
 	path = templates/app-stub/src
 	url = https://github.com/mozilla/mortar-app-stub.git
+[submodule "templates/game-stub/src"]
+	path = templates/game-stub/src
+	url = https://github.com/mozilla/mortar-game-stub.git
