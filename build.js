@@ -9,20 +9,26 @@ var archiver = require('archiver');
 
 
 function compress(directory, outputPath, doneCallback) {
+
   var base = path.basename(directory);
   var srcDirectory = directory + '/src/';
   var output = fs.createWriteStream(outputPath);
+  var outputSize = 0;
   var zipArchive = archiver('zip');
 
+  // "you should be listening to output's close event.
+  // finalize fires when archiver data has been *emitted*,
+  // not *consumed* by your destination."
+  // from https://github.com/ctalkington/node-archiver/issues/58#issuecomment-32690028
   output.on('close', function() {
     console.log('done with the zip', outputPath);
-    doneCallback();
+    doneCallback(outputSize);
   });
 
   zipArchive.pipe(output);
 
   zipArchive.bulk([
-      { src: [ '**/*' ], cwd: srcDirectory, expand: true }
+    { src: [ '**/*' ], cwd: srcDirectory, expand: true }
   ]);
 
   zipArchive.finalize(function(err, bytes) {
@@ -31,7 +37,9 @@ function compress(directory, outputPath, doneCallback) {
       throw err;
     }
 
-    console.log('done:', base, bytes);
+    outputSize = bytes;
+
+    console.log('done compressing', base, bytes);
 
   });
 
@@ -39,21 +47,29 @@ function compress(directory, outputPath, doneCallback) {
 
 
 function buildProject(projectPath) {
+
   var deferred = q.defer();
   var base = path.basename(projectPath);
-  var outputPath = 'dist/' + base + '.zip';
+  var filename = base + '.zip';
+  var outputPath = 'dist/' + filename;
 
-  compress(projectPath, outputPath, function() {
-    deferred.resolve(projectPath);
+  compress(projectPath, outputPath, function(compressedSize) {
+    deferred.resolve({
+      file: filename,
+      size: compressedSize
+    });
   });
 
   return deferred.promise;
+
 }
 
 
 function doneCallback(result) {
+
   console.log('mortar-devtools built! superYAY!');
-  console.log(result.join('\n'));
+  console.log(JSON.stringify(result, null, '\t'));
+
 }
 
 
