@@ -17,6 +17,7 @@
   "devDependencies": {
     "glob": "~3.2.8",
     "q": "~1.0.0",
-    "archiver": "~0.5.1"
+    "archiver": "~0.5.1",
+    "shasum": "~1.0.0"
   }
 }

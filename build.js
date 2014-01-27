@@ -6,6 +6,7 @@ var q = require('q');
 var path = require('path');
 var fs = require('fs');
 var archiver = require('archiver');
+var sha1sum = require('shasum');
 
 
 function compress(directory, outputPath, doneCallback) {
@@ -21,8 +22,12 @@ function compress(directory, outputPath, doneCallback) {
   // not *consumed* by your destination."
   // from https://github.com/ctalkington/node-archiver/issues/58#issuecomment-32690028
   output.on('close', function() {
+
     console.log('done with the zip', outputPath);
-    doneCallback(outputSize);
+
+    // TODO Maybe it's not ideal to read the whole thing again!
+    doneCallback(outputSize, sha1sum(fs.readFileSync(outputPath)));
+
   });
 
   zipArchive.pipe(output);
@@ -53,10 +58,11 @@ function buildProject(projectPath) {
   var filename = base + '.zip';
   var outputPath = 'dist/' + filename;
 
-  compress(projectPath, outputPath, function(compressedSize) {
+  compress(projectPath, outputPath, function(compressedSize, sha) {
     deferred.resolve({
       file: filename,
-      size: compressedSize
+      size: compressedSize,
+      sha: sha
     });
   });
 
