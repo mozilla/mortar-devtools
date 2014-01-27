@@ -51,6 +51,27 @@ function compress(directory, outputPath, doneCallback) {
 }
 
 
+// We're actually using the manifest.webapp file to get metadata about each tmplt
+function readMetadata(projectPath) {
+
+  var metaPath = path.join(projectPath, 'src', 'manifest.webapp');
+  console.log('using:', projectPath, metaPath);
+
+  var metadata = {};
+
+  if(fs.existsSync(metaPath)) {
+    try {
+      var data = fs.readFileSync(metaPath);
+      metadata = JSON.parse(data);
+    } catch(e) {
+      console.error("Invalid JSON file", metaPath);
+    }
+  }
+
+  return metadata;
+}
+
+
 function buildProject(projectPath) {
 
   var deferred = q.defer();
@@ -58,12 +79,20 @@ function buildProject(projectPath) {
   var filename = base + '.zip';
   var outputPath = 'dist/' + filename;
 
+
   compress(projectPath, outputPath, function(compressedSize, sha1sum) {
+
+    var projectMetadata = readMetadata(projectPath);
+
+    var description = projectMetadata.description || '';
+
     deferred.resolve({
       file: filename,
       size: compressedSize,
-      sha1: sha1sum
+      sha1: sha1sum,
+      description: description
     });
+
   });
 
   return deferred.promise;
@@ -76,6 +105,7 @@ function doneCallback(result) {
   var jsonList = JSON.stringify(result, null, '\t');
   fs.writeFileSync('dist/list.json', jsonList);
   console.log('mortar-devtools built! superYAY!');
+  console.log(jsonList);
 
 }
 
