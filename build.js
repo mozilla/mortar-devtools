@@ -58,11 +58,11 @@ function buildProject(projectPath) {
   var filename = base + '.zip';
   var outputPath = 'dist/' + filename;
 
-  compress(projectPath, outputPath, function(compressedSize, sha) {
+  compress(projectPath, outputPath, function(compressedSize, sha1sum) {
     deferred.resolve({
       file: filename,
       size: compressedSize,
-      sha: sha
+      sha1: sha1sum
     });
   });
 
@@ -73,8 +73,9 @@ function buildProject(projectPath) {
 
 function doneCallback(result) {
 
+  var jsonList = JSON.stringify(result, null, '\t');
+  fs.writeFileSync('dist/list.json', jsonList);
   console.log('mortar-devtools built! superYAY!');
-  console.log(JSON.stringify(result, null, '\t'));
 
 }
 
