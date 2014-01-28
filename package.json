@@ -4,7 +4,8 @@
   "description": "A collection of Web App templates for Firefox's Devtools",
   "main": "build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "upload": "node upload.js"
   },
   "keywords": [
     "mortar",
