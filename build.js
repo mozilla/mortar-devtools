@@ -84,12 +84,14 @@ function buildProject(projectPath) {
 
     var projectMetadata = readMetadata(projectPath);
 
+    var name = projectMetadata.name || base;
     var description = projectMetadata.description || '';
 
     deferred.resolve({
       file: filename,
       size: compressedSize,
       sha1: sha1sum,
+      name: name,
       description: description
     });
 
