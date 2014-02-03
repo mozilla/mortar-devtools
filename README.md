@@ -11,6 +11,19 @@ cd mortar-devtools
 node build.js
 ````
 
+To upload to a server, ensure you have a config file with the proper settings in place. A sample config.local.json file is in place, you can use it as a base:
+
+````bash
+cp config.local.json config.json
+````
+
+Edit it to suit your needs and then you can run the script that automatically uploads things to the server:
+
+````bash
+node upload.js
+````
+
+
 ## Pending stuff
 
 - Generate JSON for devtools
