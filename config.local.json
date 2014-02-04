@@ -1,5 +1,6 @@
 {
   "username": "your_username",
   "host": "example.com",
-  "remote_path": "~/public_html/remote/destination/path"
+  "remote_path": "~/public_html/remote/destination/path",
+  "remote_directory": "http://example.com/destination/"
 }

@@ -7,6 +7,7 @@ var path = require('path');
 var fs = require('fs');
 var archiver = require('archiver');
 var sha1sum = require('shasum');
+var config = require('./config');
 
 
 function compress(directory, outputPath, doneCallback) {
@@ -25,7 +26,7 @@ function compress(directory, outputPath, doneCallback) {
 
     console.log('done with the zip', outputPath);
 
-    // TODO Maybe it's not ideal to read the whole thing again!
+    // TODO it's probably not ideal to read the whole thing again!
     doneCallback(outputSize, sha1sum(fs.readFileSync(outputPath)));
 
   });
@@ -72,7 +73,7 @@ function readMetadata(projectPath) {
 }
 
 
-function buildProject(projectPath) {
+function buildProject(projectPath, remotePath) {
 
   var deferred = q.defer();
   var base = path.basename(projectPath);
@@ -88,7 +89,7 @@ function buildProject(projectPath) {
     var description = projectMetadata.description || '';
 
     deferred.resolve({
-      file: filename,
+      file: remotePath + filename,
       size: compressedSize,
       sha1: sha1sum,
       name: name,
@@ -115,9 +116,15 @@ function doneCallback(result) {
 glob('templates/*', function(err, files) {
 
   var tasks = [];
+  var remotePath = config.remote_directory;
+
+  if(remotePath[ remotePath.length - 1 ] !== '/') {
+    remotePath += '/';
+    console.error('Woops, remotePath does not end with /, it was automatically corrected.');
+  }
 
   files.forEach(function(f) {
-    tasks.push( buildProject(f) );
+    tasks.push( buildProject(f, remotePath) );
   });
 
   q.all( tasks )
