@@ -6,7 +6,7 @@ One project to build them all, and in the darkness distribute and bind them to y
 
 
 ````bash
-git clone https://github.com/sole/mortar-devtools.git
+git clone https://github.com/sole/mortar-devtools.git --recursive
 cd mortar-devtools
 node build.js
 ````
@@ -23,6 +23,18 @@ Edit it to suit your needs and then you can run the script that automatically up
 node upload.js
 ````
 
+## Directory structure in `templates/`
+
+For each template we want to include, we'll create a directory under `templates`.
+
+Then add **a git submodule** for the template in a `src` subdirectory. For exampl, this is how you would add the `app-stub` template:
+
+````
+cd mortar-devtools/templates
+git submodule add https://github.com/mozilla/mortar-app-stub.git src
+````
+
+An **icon** for the template is required too (this will be shown in the App Manager when listing the available templates). Icon format is **PNG**.
 
 ## Pending stuff
 
