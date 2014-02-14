@@ -27,7 +27,7 @@ node upload.js
 
 For each template we want to include, we'll create a directory under `templates`.
 
-Then add **a git submodule** for the template in a `src` subdirectory. For exampl, this is how you would add the `app-stub` template:
+Then add **a git submodule** for the template in a `src` subdirectory. For example, this is how you would add the `app-stub` template:
 
 ````
 cd mortar-devtools/templates
