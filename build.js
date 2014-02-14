@@ -78,10 +78,11 @@ function buildProject(projectPath, remotePath) {
 
   var deferred = q.defer();
   var base = path.basename(projectPath);
-  var filename = base + '.zip';
-  var outputPath = path.join(distDir, filename);
+  var zipFilename = base + '.zip';
+  var outputPath = path.join(distDir, zipFilename);
+  var iconFilename = base + '.png';
   var srcIcon = path.join(projectPath, 'icon.png');
-  var dstIcon = path.join(distDir, base + '.png');
+  var dstIcon = path.join(distDir, iconFilename);
 
   compress(projectPath, outputPath, function(compressedSize, sha1sum) {
 
@@ -100,7 +101,8 @@ function buildProject(projectPath, remotePath) {
       }
 
       deferred.resolve({
-        file: remotePath + filename,
+        file: remotePath + zipFilename,
+        icon: remotePath + iconFilename,
         size: compressedSize,
         sha1: sha1sum,
         name: name,
