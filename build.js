@@ -7,8 +7,9 @@ var path = require('path');
 var fs = require('fs');
 var archiver = require('archiver');
 var sha1sum = require('shasum');
+var copyFile = require('fast-copy-file');
 var config = require('./config');
-
+var distDir = 'dist';
 
 function compress(directory, outputPath, doneCallback) {
 
@@ -78,22 +79,34 @@ function buildProject(projectPath, remotePath) {
   var deferred = q.defer();
   var base = path.basename(projectPath);
   var filename = base + '.zip';
-  var outputPath = 'dist/' + filename;
-
+  var outputPath = path.join(distDir, filename);
+  var srcIcon = path.join(projectPath, 'icon.png');
+  var dstIcon = path.join(distDir, base + '.png');
 
   compress(projectPath, outputPath, function(compressedSize, sha1sum) {
 
     var projectMetadata = readMetadata(projectPath);
-
     var name = projectMetadata.name || base;
     var description = projectMetadata.description || '';
 
-    deferred.resolve({
-      file: remotePath + filename,
-      size: compressedSize,
-      sha1: sha1sum,
-      name: name,
-      description: description
+    console.log('ICON:', srcIcon, '->', dstIcon);
+
+    copyFile(srcIcon, dstIcon, function(err) {
+
+      if(err) {
+        console.log('error copying file', err);
+        deferred.reject();
+        return;
+      }
+
+      deferred.resolve({
+        file: remotePath + filename,
+        size: compressedSize,
+        sha1: sha1sum,
+        name: name,
+        description: description
+      });
+
     });
 
   });
