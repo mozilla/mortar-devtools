@@ -127,6 +127,11 @@ function doneCallback(result) {
 
 }
 
+// ---
+
+if(!fs.existsSync(distDir)) {
+    fs.mkdirSync(distDir);
+}
 
 glob('templates/*', function(err, files) {
 
