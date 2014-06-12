@@ -31,6 +31,8 @@ Then add **a git submodule** for the template in a `src` subdirectory. For examp
 
 ````
 cd mortar-devtools/templates
+mkdir app-stub
+cd app-stub
 git submodule add https://github.com/mozilla/mortar-app-stub.git src
 ````
 

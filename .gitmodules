@@ -1,3 +1,6 @@
 [submodule "templates/privileged-remote-app/src"]
 	path = templates/privileged-remote-app/src
 	url = https://github.com/mozilla/mortar-privileged-remote-app.git
+[submodule "templates/privileged-empty-app/src"]
+	path = templates/privileged-empty-app/src
+	url = https://github.com/mozilla/mortar-privileged-empty-app.git
