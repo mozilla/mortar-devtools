@@ -1,3 +1,0 @@
-[submodule "templates/privileged-app-stub/src"]
-	path = templates/privileged-app-stub/src
-	url = https://github.com/mozilla/mortar-privileged-app-stub
