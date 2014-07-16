@@ -53,7 +53,7 @@ function compress(directory, outputPath, doneCallback) {
 }
 
 
-// We're actually using the manifest.webapp file to get metadata about each tmplt
+// We're actually using the manifest.webapp file to get metadata about each template
 function readMetadata(projectPath) {
 
   var metaPath = path.join(projectPath, 'src', 'manifest.webapp');
