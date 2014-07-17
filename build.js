@@ -8,6 +8,7 @@ var fs = require('fs');
 var archiver = require('archiver');
 var sha1sum = require('shasum');
 var copyFile = require('fast-copy-file');
+var dateformat = require('dateformat');
 var config = require('./config');
 var distDir = 'dist';
 
@@ -83,6 +84,7 @@ function buildProject(projectPath, remotePath) {
   var iconFilename = base + '.png';
   var srcIcon = path.join(projectPath, 'icon.png');
   var dstIcon = path.join(distDir, iconFilename);
+  var timestamp = '?t=' + dateformat(new Date(), 'yyyymmddHHMMss');
 
   compress(projectPath, outputPath, function(compressedSize, sha1sum) {
 
@@ -101,8 +103,8 @@ function buildProject(projectPath, remotePath) {
       }
 
       deferred.resolve({
-        file: remotePath + zipFilename,
-        icon: remotePath + iconFilename,
+        file: remotePath + zipFilename + timestamp,
+        icon: remotePath + iconFilename + timestamp,
         size: compressedSize,
         sha1: sha1sum,
         name: name,

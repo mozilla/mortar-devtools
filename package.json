@@ -15,11 +15,12 @@
   ],
   "author": "Mozilla",
   "license": "Apache 2",
-  "devDependencies": {
+  "dependencies": {
+    "archiver": "~0.5.1",
+    "dateformat": "^1.0.8-1.2.3",
+    "fast-copy-file": "0.0.1",
     "glob": "~3.2.8",
     "q": "~1.0.0",
-    "archiver": "~0.5.1",
-    "shasum": "~1.0.0",
-    "fast-copy-file": "0.0.1"
+    "shasum": "~1.0.0"
   }
 }
