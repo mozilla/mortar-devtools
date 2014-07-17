@@ -12,6 +12,7 @@ Now seriously. This is a project to build the template + metadata files we uploa
 ````bash
 git clone https://github.com/sole/mortar-devtools.git --recursive
 cd mortar-devtools
+npm install # make sure all dependencies are installed
 node build.js
 ````
 
