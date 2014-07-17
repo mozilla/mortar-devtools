@@ -118,7 +118,7 @@ function buildProject(projectPath, remotePath) {
 }
 
 
-function doneCallback(result) {
+function writeListOfTemplates(result) {
 
   var jsonList = JSON.stringify(result, null, '\t');
   fs.writeFileSync('dist/list.json', jsonList);
@@ -148,7 +148,7 @@ glob('templates/*', function(err, files) {
   });
 
   q.all( tasks )
-    .then(doneCallback);
+    .then(writeListOfTemplates);
 
 });
 
