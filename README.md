@@ -2,7 +2,7 @@
 
 _One project to build them all, and in the darkness distribute and bind them to your devtools._
 
-Now seriously. This is a project to build the template + metadata files we upload to a CDN so that Firefox DevTools' [WebIDE](https://hacks.mozilla.org/2014/06/webide-lands-in-nightly/) can present a nice list of templates for you to kick start your app.
+Now seriously. This is a project to build the template + metadata files we upload to a CDN so that Firefox DevTools' [WebIDE](https://developer.mozilla.org/en-US/docs/Tools/WebIDE) can present a nice list of templates for you to kick start your app.
 
 ![New app screen in Web IDE](./assets/webide.png)
 
@@ -48,7 +48,7 @@ cd app-stub
 git submodule add https://github.com/mozilla/mortar-app-stub.git src
 ````
 
-An **icon** for the template is required too (this will be shown in the App Manager when listing the available templates). Icon format is **PNG**.
+An **icon** for the template is required too (this will be shown in the WebIDE when listing the available templates). Icon format is **PNG**.
 
 ## Pending stuff
 
