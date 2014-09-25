@@ -4,3 +4,6 @@
 [submodule "templates/privileged-empty-app/src"]
 	path = templates/privileged-empty-app/src
 	url = https://github.com/mozilla/mortar-privileged-empty-app.git
+[submodule "templates/hello-world/src"]
+	path = templates/hello-world/src
+	url = https://github.com/mozilla/mortar-hello-world.git
