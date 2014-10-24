@@ -34,6 +34,13 @@ The provided script assumes that you have uploaded a public key to the other ser
 
 We upload it to a CDN for production, but to test with your own server you can change the URL that WebIDE pulls the JSON file with templates info from. Go to `about:config` and edit `devtools.webide.templatesURL` to point to the URL of the JSON file in your server.
 
+You can also pass in options from the command line. These will override the values in the `config.json` file. It can be useful if you want to experiment with different settings but do not want to edit the config file. For example:
+
+````bash
+node build.js --remote-directory http://somewhere/else/
+````
+
+will use that setting temporarily.
 
 ## Directory structure in `templates/`
 
