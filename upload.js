@@ -1,13 +1,12 @@
+var nconf = require('nconf');
 
-var options = require('./config');
-var username = options.username;
-var host = options.host;
-var remote_path = options.remote_path;
+nconf.argv().env().file({ file: 'config.json' });
+
+var username = nconf.get('username');
+var host = nconf.get('host');
+var remote_path = nconf.get('remote-path');
 var spawn = require('child_process').spawn;
 var glob = require('glob');
-
-console.log('upload');
-console.log(options);
 
 // When we use spawn we don't call a shell that does the wildcard expansion for us,
 // so we'll use glob to get the expanded list of files
