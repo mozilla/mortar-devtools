@@ -9,8 +9,10 @@ var archiver = require('archiver');
 var sha1sum = require('shasum');
 var copyFile = require('fast-copy-file');
 var dateformat = require('dateformat');
-var config = require('./config');
+var nconf = require('nconf');
 var distDir = 'dist';
+
+nconf.argv().env().file({ file: 'config.json' });
 
 function compress(directory, outputPath, doneCallback) {
 
@@ -138,7 +140,7 @@ if(!fs.existsSync(distDir)) {
 glob('templates/*', function(err, files) {
 
   var tasks = [];
-  var remotePath = config.remote_directory;
+  var remotePath = nconf.get('remote-directory');
 
   if(remotePath[ remotePath.length - 1 ] !== '/') {
     remotePath += '/';
