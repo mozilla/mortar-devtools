@@ -6,17 +6,17 @@ Now seriously. This is a project to build the template + metadata files we uploa
 
 ![New app screen in Web IDE](./assets/webide.png)
 
-## I'm in! How to?
+## I'm in! How?
 
 
 ````bash
-git clone https://github.com/sole/mortar-devtools.git --recursive
+git clone https://github.com/mozilla/mortar-devtools.git --recursive
 cd mortar-devtools
 npm install # make sure all dependencies are installed
 node build.js
 ````
 
-This generates a `dist` folder with the content that WebIDE will present when you click "New App". But this has to be uploaded somewhere. 
+This generates a `dist` folder with the content that WebIDE will present when you click "New App". But this has to be uploaded somewhere.
 
 To upload to a server, ensure you have a config file with the proper settings in place. A sample `config.local.json` file that you can use as a base is provided:
 
